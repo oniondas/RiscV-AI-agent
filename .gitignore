@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.env
+
+# RISC-V Tests suite (Should be fetched, not committed)
+riscv-tests/
+
+# Verilator generated objects
+obj_dir/
+*.vcd
+
+# OS / Editor Files
+.DS_Store
+.vscode/
+
+# Scratch & temporary workspace
+scratch/
+test_results.txt
