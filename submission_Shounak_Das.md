@@ -12,6 +12,8 @@
 
 **Project Repository:** https://github.com/oniondas/RiscV-AI-agent.git
 
+**Quick Summary:** This case study dynamically evaluates Agentic RAG generation pipelines against physical logic structures. I implemented a robust, AST-aware retrieval system with an intelligent LLM synthesis loop utilizing Verilator `make sim` for automated error corrections. The result is a fully functional, mathematically correct **Single-Cycle RV32I Processor** that has been functionally verified against the official `riscv-tests` passing heavily trapped combinatorial states (42/42 ISA operations passed).
+
 ## A. Corpus & Knowledge Base
 - **Sources Used:** 
   1. The RISC-V Unprivileged Architecture ISA Specification for authoritative source-of-truth semantics on instruction encoding and operational definitions.
@@ -21,7 +23,7 @@
 - **Retrieval & Embedding Approach:** A robust TF-IDF and Cosine Similarity dense index is mapped against incoming user queries (e.g., "Handle load hazard" or "B-type encoding") extracting relevant structural code snippets dynamically. 
 
 ## B. Pipeline Design
-- **Architecture Diagram:**
+- **Architecture Diagram:** *(A detailed Mermaid visual mapping both the RAG Pipeline and the Hardware Core structure is available in the repository's `README.md`)*
   - `SemanticHardwareRetriever`: Embeds and fetches dense contextual logic rules from the chunked KB.
   - `AdvancedHardwareLLM (Gemini)`: Generates the raw architectural RTL based on standard RAG context.
   - `AgenticAutoFixer`: The core differentiator—Standard LLMs hallucinate loops or forget default cases in a Verilog switch, leading to invisible hardware latches. This pipeline triggers `make sim` on Verilator. Compilation `stderr` warnings and syntax errors are dynamically trapped and fed back to the LLM iteratively as correction prompts until zero-warning execution is achieved.
